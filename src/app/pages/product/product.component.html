@@ -1,0 +1,34 @@
+<br>
+<div  class = "container col-md-12">
+    <div class = "card">
+        <div class = "card-header">
+            <h3>Productos</h3>
+        </div>
+        <div class = "card-body">
+            <table class = "table table-hover">
+                <thead>
+                    <tr class = "text-center">
+                        <th style="display:none;">ID</th>
+                        <th>NOMBRE</th>
+                        <th>PRECIO</th>
+                        <th>ACCIONES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor = "let product of products" class = "text-center" (click)="onUpdate(product)">
+                        <td style="display:none;">{{product.id}}</td>
+                        <td>             
+                            {{product.name}}
+                        </td>
+                        <td>{{product.price}}</td>
+                        <td>
+                            <button (click) = "edit(product)" class = "btn btn-warning">Editar</button>&nbsp;
+                            <button (click)  = "delete(product)" class = "btn btn-danger">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<br>

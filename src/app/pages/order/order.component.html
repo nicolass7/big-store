@@ -1,0 +1,111 @@
+<div  class = "container col-md-12">
+    <div class = "card">
+        <div class = "card-header">
+            <h3>Ordenes</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover" >
+                <thead>
+                    <tr class="text-center">
+                        <th>IDENT. ORDEN</th>
+                        <th>FECHA</th>
+                        <th style="display:none;">ID USER</th>
+                        <th>NOMBRE USUARIO</th>
+                        <th>NOMBRE TIENDA</th>
+                        <th>ACCIONES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let order of orders" class="text-center">
+                        <td>{{order.id}}</td>
+                        <td>{{order.dateOrder}}</td>
+                        <td style="display:none;">{{order.userId}}</td>
+                        <td>{{order.userName}}</td>
+                        <td>{{order.storeName}}</td>
+                        <td>
+                            <button (click)="getDetail(order)"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Mostrar Detalle</button>&nbsp;
+                            <button (click) = "delete(order)" class = "btn btn-danger">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="modal-title">Agregar una Orden</h5>                      
+            </div>
+            <div class="card-body">
+                <form [formGroup] = contractForm>
+                    <div class="form-group">
+                        <label for="">Fecha de la Orden:</label>
+                        <div class="input-group">
+                            <input class="form-control" formControlName="dateOrder" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Nombre del usuario:</label>
+                        <div class="input-group">                        
+                            <input type="text" class="form-control" formControlName="userName">
+                        </div>                        
+                    </div>
+                    <div class="form-group">
+                        <label>Nombre de la Tienda:</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" formControlName="storeName">
+                        </div>
+                    </div>                            
+                    <br>    
+                    <table class="table table-hover">
+                        <thead>
+                            <tr class= "text-center">
+                                <th>NUM. ORDEN</th>
+                                <th>PRODUCT ID</th>
+                                <th>NOMBRE DEL PRODUCTO</th>
+                                <th>PRECIO</th>
+                                <th>CANTIDAD</th>
+                                <th>TOTAL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let detailAllU of detailAlls" class="text-center">
+                                <td>{{detailAllU.positionId}}</td>
+                                <td>{{detailAllU.productId}}</td>
+                                <td>{{detailAllU.name}}</td>
+                                <td>{{detailAllU.price}}</td>
+                                <td>{{detailAllU.quantity}}</td>
+                                <td>{{detailAllU.total}}</td>                   
+                            </tr>                          
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-md-8"><p class="float-start"></p></div>
+                        <div class="col-md-2"><p class="float-end">SUB-TOTAL</p></div>
+                        <div class="col-md-2"><input class="form-control" formControlName="subTotal"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8"><p class="float-start"></p></div>
+                        <div class="col-sm-2"><p class="float-end">IGV:</p></div>
+                        <div class="col-sm-2"><input class="form-control" formControlName="igv"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8"><p class="float-start"></p></div>  
+                        <div class="col-sm-2"><p class="float-end">TOTAL:</p></div>  
+                        <div class="col-sm-2"><input class="form-control" formControlName="totalDetail"></div>
+                        <div><br></div>
+                    </div>                       
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+        <br>
+    </div>
+
+</div>

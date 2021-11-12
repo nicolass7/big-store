@@ -1,0 +1,55 @@
+<br>
+<div class="container col-md-12">
+  <div class="card">
+      <div class="card-header">
+          <h3>Agregar Producto</h3>
+      </div>
+      <div class= "card-body">
+        <form [formGroup] = contractForm  >
+          <div class="form-group">
+            <label for="">Nombre:</label>
+            <input type="text" formControlName=name class="form-control" placeholder="Nombre" >                          
+          </div>
+          <div class="form-group">
+            <label for="">Precio:</label>       
+            <input type="text"  formControlName=price  class="form-control" placeholder="precio">
+            <div class="alert alert-danger" *ngIf="contractForm.controls['price']?.invalid &&
+              ( contractForm.controls['price']?.dirty ||contractForm.controls['price']?.touched) ">
+              <div class="container-error-message">
+                El nombre es requerido.
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="">Descripcion:</label>
+            <input type="text" formControlName="description" class="form-control" placeholder="Descripcion">
+            <div class="alert alert-danger" *ngIf="contractForm.controls['description']?.invalid && 
+              (contractForm.controls['description']?.dirty || contractForm.controls['description']?.touched)">
+              <div class="container-error-message">
+                La description es requerida.
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="">Categoria:</label>
+            <select formContolName="categoryId" class="form-select  form-select-lg mb-3">
+              <option *ngFor = "let category of categories" value={{category.id}} [selected]="category.id == category.id">{{category.name}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="">Stock:</label>
+            <input type="text" formControlName="stock" class="form-control" placeholder="Stock">
+            <div class="alert alert-danger" *ngIf="contractForm.controls['stock']?.invalid && 
+              (contractForm.controls['stock']?.dirty || contractForm.controls['stock']?.touched)">
+              <div class="container-error-message">
+                El stock es requerido.
+              </div>
+            </div>
+          </div>           
+          <br>
+          <button type="submit" (click)="save()" name="save" class="btn btn-danger">Guardar</button>
+        </form>  
+      </div>
+  </div>
+</div>
+<br>

@@ -1,0 +1,106 @@
+<br>
+<div class="container col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <h3>Agregar Orden</h3>
+        </div>
+        <div class="card-body">
+            <form [formGroup] = contractForm>
+                <div class="form-group">
+                    <label>Fecha de la Orden:</label>
+                    <div class="col-6">
+                        <div class="input-group">
+                            <input class="form-control"  formControlName="dateOrder" placeholder="dd/mm/yyyy" name="d2"  ngbDatepicker #d2="ngbDatepicker" >
+                            <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button"></button>            
+                        </div> 
+                        <div class="alert alert-danger" *ngIf="contractForm.controls['dateBirth']?.invalid && (contractForm.controls['dateBirth']?.dirty || contractForm.controls['dateBirth']?.touched)">
+                            <div class="container-error-message">
+                                El valor es requerido
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <label>Nombre del usuario:</label>
+                    <div class="form-group col-md-8">   
+                        <input type="hidden" class="form-control" formControlName="userId" >      
+                        <input type="text" class="form-control" formControlName="userName" placeholder="First name">
+                    </div>    
+                    <div class="form-group col-md-2">
+                        <button (click)="selectUser()" class="btn btn-warning">BuscarUsuario</button> &nbsp;
+                    </div>
+                    <div class="form-group col-md-2">
+                        <button (click)="addUser()" class="btn btn-info">Agregar Usuario</button>                          
+                    </div>
+                </div>
+                <label>Nombre de la Tienda:</label>
+                <div class="input-group">
+                    <select  formControlName="storeId" class="form-select form-select-lg mb-3">
+                        <option *ngFor="let store of stores" value="{{store.id}}">{{store.name}}</option>
+                    </select >
+                </div>
+                <br>
+                <div class="row g-3">                   
+                    <div class="form-group col-md-2">
+                        <button (click)="selectProduct()" class="btn btn-warning">Buscar Productos</button>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <button (click)="addProduct()" class="btn btn-info">Agregar Producto</button>
+                    </div>
+                </div>  
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr class= "text-center">
+                            <th>POSITION</th>
+                            <th>PRODUCT ID</th>
+                            <th>NOMBRE DEL PRODUCTO</th>
+                            <th>PRECIO</th>
+                            <th>CANTIDAD</th>
+                            <th>TOTAL</th>
+                            <th>ACCION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let detailAllU of detailAlls" class="text-center" (click)="onUpdate(detailAllU)" >
+                            <td>{{detailAllU.positionId}}</td>
+                            <td>{{detailAllU.productId}}</td>
+                            <td>{{detailAllU.name}}</td>
+                            <td>{{detailAllU.price}}</td>
+                            <td><input class="col-2" formControlName="quantity" (keyup)="onkey($event)"></td>
+                            <td>{{detailAllU.total}}</td>       
+                            <td>
+                                <button (click)="deleteRow()" class="btn btn-danger">Eliminar</button>
+                            </td>                    
+                        </tr>                          
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-8"><p class="float-start"></p></div>
+                    <div class="col-md-2"><p class="float-end">SUB-TOTAL</p></div>
+                    <div class="col-md-2"><input class="form-control" formControlName="subTotal" (keyup)="onkey($event)"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8"><p class="float-start"></p></div>
+                    <div class="col-sm-2"><p class="float-end">IGV:</p></div>
+                    <div class="col-sm-2"><input class="form-control" formControlName="igv" (keyup)="onkey($event)"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-8"><p class="float-start"></p></div>  
+                    <div class="col-sm-2"><p class="float-end">TOTAL:</p></div>  
+                    <div class="col-sm-2"><input class="form-control" formControlName="totalDetail" (keyup)="onkey($event)"></div>
+                    <div><br></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-8"></div>  
+                    <div class="col-sm-2"></div>  
+                    <div class="col-sm-2"><p class="float-end"><p class="float-end"> <button type="submit" (click)="save()" name="save" class="btn btn-success">Guardar Orden</button></p></div>
+                </div>
+               
+            </form>
+        </div>
+    </div>
+</div>
+<br>
+
+
